@@ -20,3 +20,8 @@ print(f"Launched client with PID {client.pid}")
 client.wait()
 print(f"Client was closed")
 ```
+
+# Installation
+```bash
+pip install -U git+https://github.com/h0nde/problox
+```
