@@ -126,12 +126,7 @@ class Session:
 
     def set_cookiejar(self, cookiejar):
         """Set cookiejar to be used for requests."""
-        self._http.cookies = cookiejar
-    
-    def save_cookiejar(self, filename=None):
-        if filename:
-            self._http.cookies.filename = filename
-        self._http.cookies.save()
+        self._http.cookies.update(cookiejar)
 
     def get_cookie(self, name):
         """Find cookie and return it's value, else return None."""
