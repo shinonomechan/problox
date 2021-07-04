@@ -126,7 +126,12 @@ class Session:
 
     def set_cookiejar(self, cookiejar):
         """Set cookiejar to be used for requests."""
-        self._http.cookies.update(cookiejar)
+        self._http.cookies = cookiejar
+    
+    def save_cookiejar(self, filename=None):
+        if filename:
+            self._http.cookies.filename = filename
+        self._http.cookies.save()
 
     def get_cookie(self, name):
         """Find cookie and return it's value, else return None."""
@@ -139,7 +144,7 @@ class Session:
             return re.search(r"browserid=([^&]*)", value).group(1)
 
     def _build_join_script_url(self, params):
-        """Build and return join script url using provided params"""
+        """Build and return join script url using provided params."""
         return "https://assetgame.roblox.com/game/PlaceLauncher.ashx?" + urlencode(params)
 
     def _launch_client(self, join_script_url, client_path=get_latest_client_path(), locale="en_us"):
