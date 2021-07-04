@@ -12,5 +12,5 @@ setuptools.setup(
     classifiers=[],
     install_requires=requirements,
     include_package_data=True,
-    version="1.0.0"
+    version="1.0.1"
 )
