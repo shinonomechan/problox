@@ -1,6 +1,5 @@
 import subprocess
 import time
-import psutil
 
 class Client:
     def __init__(self, client_path, auth_ticket, join_script_url,
