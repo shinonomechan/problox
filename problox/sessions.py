@@ -4,6 +4,7 @@ from .exceptions import *
 from http.cookiejar import MozillaCookieJar
 from urllib.parse import urlencode
 from requests.structures import CaseInsensitiveDict
+import simplejson.errors
 import json as jsonlib
 import re
 import requests
@@ -75,7 +76,7 @@ class Session:
                 raise APIError(
                     code=err["code"], message=err["message"],
                     response=response)
-        except jsonlib.JSONDecodeError:
+        except (jsonlib.JSONDecodeError, simplejson.errors.JSONDecodeError):
             pass
 
         return response
