@@ -16,6 +16,7 @@ print(f"Authenticated as {user_info['name']}")
 
 client = rbx.join_game(1818, locale="fr_fr")
 print(f"Launched client with PID {client.pid}")
+
 client.wait()
 print(f"Client was closed")
 ```
