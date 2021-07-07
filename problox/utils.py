@@ -17,12 +17,12 @@ def get_latest_client_path():
 
     version_url = "https://s3.amazonaws.com/setup.roblox.com/version"
     version = requests.get(version_url).text.strip()
-    paths = [
+    
+    paths = (
         os.environ["LOCALAPPDATA"] + "\\" + f"Roblox\\Versions\\{version}",
         os.environ["SYSTEMDRIVE"] + "\\" + f"Program Files (x86)\\Roblox\\Versions\\{version}",
         os.environ["SYSTEMDRIVE"] + "\\"+ f"Program Files\\Roblox\\Versions\\{version}"
-    ]
-
+    )
     for path in paths:
         if os.path.isdir(path):
             return os.path.join(path, "RobloxPlayerBeta.exe")
