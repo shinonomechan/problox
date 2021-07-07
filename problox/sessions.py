@@ -147,7 +147,8 @@ class Session:
         auth_ticket = self.request(
             method="POST",
             url="https://auth.roblox.com/v1/authentication-ticket/",
-            json={}).headers["rbx-authentication-ticket"]
+            json={}
+            ).headers["rbx-authentication-ticket"]
         client = Client(
             client_path=client_path,
             auth_ticket=auth_ticket,
