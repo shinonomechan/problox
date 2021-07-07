@@ -16,7 +16,7 @@ def get_latest_client_path():
         raise NotImplementedError("Your OS platform is not supported")
 
     version_url = "https://s3.amazonaws.com/setup.roblox.com/version"
-    version = requests.get(version_url).text.strip()
+    version = requests.get(version_url).text.rstrip()
     
     paths = (
         os.environ["LOCALAPPDATA"] + "\\" + f"Roblox\\Versions\\{version}",
