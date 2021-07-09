@@ -14,6 +14,12 @@ class Client:
     def __del__(self):
         self.close()
         super().__init__()
+        
+    def __enter__(self):
+        return self
+    
+    def __exit__(self, *_):
+        self.close()
 
     @property
     def pid(self):
