@@ -27,6 +27,12 @@ class Session:
         ins = cls(*args, **kwargs)
         ins.set_cookiejar(cookiejar)
         return ins
+    
+    def __enter__(self):
+        return self
+    
+    def __exit__(self, *_):
+        pass
 
     def request(self, method, url, json=None, data=None, headers=None, _retry=None, **kwargs):
         """Wraps `requests.Session.request` with Roblox stuff."""
