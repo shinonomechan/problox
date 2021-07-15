@@ -21,7 +21,7 @@ def get_latest_client_path():
     paths = (
         os.environ["LOCALAPPDATA"] + "\\" + f"Roblox\\Versions\\{version}",
         os.environ["SYSTEMDRIVE"] + "\\" + f"Program Files (x86)\\Roblox\\Versions\\{version}",
-        os.environ["SYSTEMDRIVE"] + "\\"+ f"Program Files\\Roblox\\Versions\\{version}"
+        os.environ["SYSTEMDRIVE"] + "\\" + f"Program Files\\Roblox\\Versions\\{version}"
     )
     for path in paths:
         if os.path.isdir(path):
