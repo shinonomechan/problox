@@ -54,4 +54,5 @@ class Client:
             self._process.kill()
         else:
             self._process.terminate()
+        self._process = None
             
