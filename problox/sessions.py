@@ -34,7 +34,7 @@ class Session:
     def __exit__(self, *_):
         pass
 
-    def request(self, method, url, json=None, data=None, headers=None, _retry=None, **kwargs):
+    def request(self, method, url, json=None, data=None, headers=None, _retry=None, ignore_api_errors=None, **kwargs):
         """Wraps `requests.Session.request` with Roblox stuff."""
         if _retry and _retry > 3:
             raise ProbloxException(f"Too many retries while sending request to {url}")
@@ -74,16 +74,18 @@ class Session:
             # set new csrf token and re-send request
             self._csrf_token = response.headers["x-csrf-token"]
             return self.request(method, url, json=json, data=data,
-                                headers=headers, _retry=_retry+1, **kwargs)
+                                headers=headers, _retry=_retry+1,
+                                ignore_api_errors=ignore_api_errors, **kwargs)
         
-        try:
-            # raise exception for error returned (if any)
-            for err in response.json().get("errors", []):
-                raise APIError(
-                    code=err["code"], message=err["message"],
-                    response=response)
-        except (jsonlib.JSONDecodeError, simplejson.errors.JSONDecodeError):
-            pass
+        if not ignore_api_errors:
+            try:
+                # raise exception for error returned (if any)
+                for err in response.json().get("errors", []):
+                    raise APIError(
+                        code=err["code"], message=err["message"],
+                        response=response)
+            except (jsonlib.JSONDecodeError, simplejson.errors.JSONDecodeError):
+                pass
 
         return response
 
