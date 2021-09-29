@@ -1,4 +1,5 @@
 from urllib.parse import urlsplit
+from functools import lru_cache
 import os
 import requests
 
@@ -11,6 +12,7 @@ def hostname_from_url(url):
     purl = urlsplit(url)
     return purl.hostname.lower()
 
+@lru_cache(maxsize=1)
 def get_latest_client_path():
     if os.name != "nt":
         raise NotImplementedError("Your OS platform is not supported")

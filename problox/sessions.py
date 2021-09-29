@@ -151,7 +151,8 @@ class Session:
         """Build and return join script url using provided params."""
         return "https://assetgame.roblox.com/game/PlaceLauncher.ashx?" + urlencode(params)
 
-    def _launch_client(self, join_script_url, client_path=get_latest_client_path(), locale="en_us"):
+    def _launch_client(self, join_script_url, client_path=None, locale="en_us"):
+        client_path = client_path or get_latest_client_path()
         auth_ticket = self.request(
             method="POST",
             url="https://auth.roblox.com/v1/authentication-ticket/",
