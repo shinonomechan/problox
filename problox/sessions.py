@@ -27,6 +27,13 @@ class Session:
         ins = cls(*args, **kwargs)
         ins.set_cookiejar(cookiejar)
         return ins
+
+    @classmethod
+    def from_roblosecurity(cls, auth_cookie, *args, **kwargs):
+        """Constructs Problox instance with provided cookiejar file."""
+        ins = cls(*args, **kwargs)
+        ins.set_cookie(".ROBLOSECURITY", auth_cookie, domain="roblox.com")
+        return ins
     
     def __enter__(self):
         return self
@@ -136,6 +143,10 @@ class Session:
     def set_cookiejar(self, cookiejar):
         """Set cookiejar to be used for requests."""
         self._http.cookies.update(cookiejar)
+
+    def set_cookie(self, name, value, **kwargs):
+        """Set cookie value by key."""
+        return self._http.cookies.set(name, value, **kwargs)
 
     def get_cookie(self, name):
         """Find cookie and return it's value, else return None."""
