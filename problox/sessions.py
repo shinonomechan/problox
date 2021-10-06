@@ -91,7 +91,7 @@ class Session:
                     raise APIError(
                         code=err["code"], message=err["message"],
                         response=response)
-            except (jsonlib.JSONDecodeError, simplejson.errors.JSONDecodeError):
+            except:
                 pass
 
         return response
