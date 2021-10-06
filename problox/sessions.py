@@ -91,6 +91,8 @@ class Session:
                     raise APIError(
                         code=err["code"], message=err["message"],
                         response=response)
+            except APIError:
+                raise
             except:
                 pass
 
